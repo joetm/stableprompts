@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  min-height: 100vh;
+
+  background-image: url('~/public/img/background/d50aadff-ecfd-4807-a137-9553430288ba.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 4rem 1rem;
+}
+
+.errornum {
+  font-size: 1.2rem;
+}

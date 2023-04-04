@@ -17,7 +17,7 @@
     "@trpc/next": "^10.18.0",
     "@trpc/react-query": "^10.18.0",
     "@trpc/server": "^10.18.0",
-    "antd": "^5.3.3",
+    "bootstrap": "^5.2.3",
     "enquire-js": "^0.2.1",
     "next": "^13.2.4",
     "next-auth": "^4.20.1",
@@ -25,6 +25,7 @@
     "rc-scroll-anim": "^2.7.6",
     "rc-tween-one": "^3.0.6",
     "react": "18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
     "superjson": "1.12.2",
     "zod": "^3.21.4"

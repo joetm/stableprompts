@@ -1,11 +1,9 @@
 import React from "react"
-import { Table } from "antd"
-import { Empty } from 'antd'
 
 
 function PromptTable({ dataSource, columns }) {
   if (!dataSource.length) {
-    return <Empty />
+    return <div>No data.</div>
   }
   return (
     <Table dataSource={dataSource} columns={columns} />

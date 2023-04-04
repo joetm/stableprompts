@@ -1,9 +1,11 @@
-import styles from "./index.module.css"
+import styles from "~/styles/index.module.css"
+
 import { type NextPage } from "next"
 import Head from "next/head"
-// import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
-import { Button, Space } from 'antd'
+import Button from 'react-bootstrap/Button'
+
+import Footer from '../components/Footer'
 
 
 const LandingPage: NextPage = () => {
@@ -18,15 +20,20 @@ const LandingPage: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.container}>
           <h1 className={styles.title}>StablePrompts</h1>
-          <Space wrap>
-            <Button
-              type={sessionData ? "link" : "primary"}
-              onClick={sessionData ? () => void signOut() : () => void signIn()}
-            >
-              {sessionData ? "Sign out" : "Sign in"}
-            </Button>
-          </Space>
+          {
+            sessionData &&
+              <Button variant="primary" href="/dashboard">
+                Dashboard
+              </Button>
+          }
+          <Button
+            variant={sessionData ? "link" : "primary"}
+            onClick={sessionData ? () => void signOut() : () => void signIn()}
+          >
+            {sessionData ? "Sign out" : "Sign in"}
+          </Button>
         </div>
+        <Footer />
       </main>
     </>
   )
