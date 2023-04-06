@@ -10,6 +10,7 @@ import Footer from '../components/Footer'
 
 const LandingPage: NextPage = () => {
   const { data: sessionData } = useSession()
+
   return (
     <>
       <Head>
