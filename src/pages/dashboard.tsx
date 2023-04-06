@@ -55,9 +55,9 @@ const Dashboard: NextPage = () => {
               </thead>
               <tbody>
                 {
-                  prompts.data.map((row) => (
-                    <tr key={row.id}>
-                      <td>{row.prompt}</td>
+                  prompts.data.map((prompt) => (
+                    <tr key={prompt.id}>
+                      <td>{prompt.text}</td>
                       <td></td>
                       <td></td>
                       <td>TODO</td>
@@ -66,7 +66,7 @@ const Dashboard: NextPage = () => {
                 }
               </tbody>
             </Table>
-            <Pages items={prompts?.data} />
+            <Pages items={prompts.data} />
           </>
         }
 

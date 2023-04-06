@@ -7,13 +7,6 @@ import {
 
 
 export const promptRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      }
-    }),
 
   getAll: publicProcedure
           .input(z.object({ userId: z.string() }))
@@ -24,7 +17,45 @@ export const promptRouter = createTRPCRouter({
               return prompts
           }),
 
+  getOne: publicProcedure
+          .input(z.object({ id: z.string() }))
+          .query(async ({ input, ctx }) => {
+              const prompt = await ctx.prisma.prompt.findUnique(
+                { where: { id: input.id } }
+              )
+              return prompt
+          }),
+
+  create: protectedProcedure
+          .input(z.object({ text: z.string() }))
+          .query(async ({ input, ctx }) => {
+              const prompt = await ctx.prisma.prompt.create({
+                data: { text: input.text }
+              })
+              return prompt
+          }),
+
+  update: protectedProcedure
+          .input(z.object({ id: z.string(), text: z.string() }))
+          .query(async ({ input, ctx }) => {
+              const prompt = await ctx.prisma.prompt.update({
+                where: { id: input.id },
+                data: { text: input.text }
+              })
+              return prompt
+          }),
+  
+  delete: protectedProcedure
+          .input(z.object({ id: z.string() }))
+          .query(async ({ input, ctx }) => {
+              const prompt = await ctx.prisma.prompt.delete({
+                where: { id: input.id } 
+              })
+              return prompt
+          }),
+
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!"
   }),
+
 })

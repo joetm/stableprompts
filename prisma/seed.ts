@@ -73,7 +73,7 @@ async function main() {
         },
         create: {
           id: promptId,
-          prompt: `User ${i} Sample prompt ${j}`,
+          text: `User ${i} Sample prompt ${j}`,
           userId,
         },
         update: {},
