@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "~/styles/prompts.module.css"
 
 import React from "react"
@@ -12,6 +14,7 @@ import { api } from "../utils/api"
 import Pages from "../components/Pages"
 import HeadMeta from '../components/HeadMeta'
 import Menu from '../components/Menu'
+import PageFooter from "../components/PageFooter"
 
 
 const Dashboard: NextPage = () => {
@@ -21,7 +24,13 @@ const Dashboard: NextPage = () => {
     alert('TODO')
   }
 
-  const prompts = api.prompt.getAll.useQuery({ userId: "w44rp6bw4r1j1pyoehho4v2p" })
+  const res = api.prompt.infinitePrompts.useQuery({
+    userId: "jbqxqxnbtpfz1h9hwp1kbtjw",
+    cursor: 1,
+  })
+  const prompts = res?.data?.items
+  const nextCursor = res?.data?.nextCursor
+  console.log('nextCursor', nextCursor)
 
   return (
     <>
@@ -30,47 +39,46 @@ const Dashboard: NextPage = () => {
       <Container>
 
         {
-          !prompts?.data?.length &&
+          prompts?.length ?
+            <>
+              <Nav className="justify-content-end">
+                <Nav.Item>
+                  <Nav.Link eventKey="export" onClick={downloadCSV} title="Download CSV">CSV</Nav.Link>
+                </Nav.Item>
+              </Nav>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th>Prompt</th>
+                    <th>Key1</th>
+                    <th>Key2</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    prompts.map((prompt) => (
+                      <tr key={prompt.id}>
+                        <td>{prompt.text}</td>
+                        <td></td>
+                        <td></td>
+                        <td>TODO</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </Table>
+              <Pages items={prompts} />
+            </>
+          :
             <Alert variant="primary">
-              Nothing here, yet.
+              Nothing to display, yet.
+              Read the <Alert.Link href="/about">About</Alert.Link> page to learn more.
             </Alert>
         }
 
-        {
-          prompts?.data?.length &&
-          <>
-            <Nav className="justify-content-end">
-              <Nav.Item>
-                <Nav.Link eventKey="export" onClick={downloadCSV} title="Download CSV">CSV</Nav.Link>
-              </Nav.Item>
-            </Nav>
-            <Table striped bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th>Prompt</th>
-                  <th>Key1</th>
-                  <th>Key2</th>
-                  <th>Created</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  prompts.data.map((prompt) => (
-                    <tr key={prompt.id}>
-                      <td>{prompt.text}</td>
-                      <td></td>
-                      <td></td>
-                      <td>TODO</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </Table>
-            <Pages items={prompts.data} />
-          </>
-        }
-
       </Container>
+      <PageFooter />
     </>
   )
 }

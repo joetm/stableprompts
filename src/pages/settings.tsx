@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation'
 import HeadMeta from '../components/HeadMeta'
 import Menu from '../components/Menu'
 import CustomModal from '../components/CustomModal'
+import PageFooter from "../components/PageFooter"
 
 
 const Settings: NextPage = () => {
@@ -135,6 +136,7 @@ const Settings: NextPage = () => {
         </Form>
 
       </Container>
+      <PageFooter />
     </>
   )
 }

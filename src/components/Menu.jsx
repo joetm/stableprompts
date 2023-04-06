@@ -9,15 +9,17 @@ import Button from 'react-bootstrap/Button'
 
 export default function Menu({title = 'StablePrompts'}) {
   const { data: sessionData } = useSession()
+
   // const router = useRouter()
   function logout() {
     signOut()
     // router.push('/')
   }
+
   return (
     <Navbar bg="light" variant="light">
       <Container>
-        <Navbar.Brand href="/">StablePrompts</Navbar.Brand>
+        <Navbar.Brand href={sessionData ? "/dashboard" : "/"}>StablePrompts</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           {

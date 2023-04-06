@@ -74,6 +74,8 @@ async function main() {
         create: {
           id: promptId,
           text: `User ${i} Sample prompt ${j}`,
+          key1: `P${i}`,
+          key2: `A`,
           userId,
         },
         update: {},

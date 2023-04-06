@@ -4,11 +4,10 @@
   align-items: center;
   /* justify-content: center; */
   min-height: 100vh;
+}
 
-  background-image: url('~/public/img/background/d50aadff-ecfd-4807-a137-9553430288ba.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+.errornum {
+  font-size: 1.2rem;
 }
 
 .container {
@@ -21,6 +20,21 @@
   padding: 4rem 1rem;
 }
 
-.errornum {
-  font-size: 1.2rem;
+.main {
+  position: relative;
+  z-index: 1;
+}
+.main::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;  
+  opacity: .4; 
+  z-index: -1;
+  background: url(~/public/img/background/d50aadff-ecfd-4807-a137-9553430288ba.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
