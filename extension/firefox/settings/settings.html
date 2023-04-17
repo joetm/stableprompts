@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StablePrompt Settings</title>
+<link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <h1>StablePrompt Extension Settings</h1>
+  <form id="settings-form">
+
+    <div>
+      Read how to configure this plugin <a href="https://www.stableprompts.com/about" target="_blank">here</a>.
+    </div>
+
+    <hr />
+
+    <label for="input1">Paste your API key<span class="required">*</span>:</label>
+    <input type="text" id="APIKEY" name="APIKEY" required />
+
+    <hr />
+
+    <label for="selector">CSS Selector<span class="required">*</span>:</label>
+    <div class="explanation">CSS selector for the element you want to listen to.</div>
+    <input type="text" id="selector" name="selector" />
+
+    <label for="event">Event Listener<span class="required">*</span>:</label>
+    <div class="explanation">The event to listen to (click or enter).</div>
+    <select id="event" name="event">
+      <option value="enter">Enter Keypress</option>
+      <option value="click">Click</option>
+    </select>
+
+    <hr />
+
+    <div class="explanation">The following optional keys are sent with each request, e.g. participant ID.</div>
+
+    <label for="key1">Key 1 (optional):</label>
+    <input type="text" id="key1" name="key1" />
+
+    <label for="key2">Key 2 (optional):</label>
+    <input type="text" id="key2" name="key2" />
+
+    <hr />
+
+    <button type="submit">Save</button>
+
+    <hr />
+
+    <div><span class="required">*</span> required</div>
+
+  </form>
+  <script src="settings.js"></script>
+</body>
+</html>

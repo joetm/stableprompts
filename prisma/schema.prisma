@@ -25,7 +25,6 @@ model Account {
     id                String  @id @default(cuid())
     userId            String
     type              String
-    api_token         String? @default(cuid()) @unique
     provider          String
     providerAccountId String
     refresh_token     String? // @db.Text
@@ -55,6 +54,7 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
+    api_token     String? @default(cuid()) @unique
     createdAt     DateTime @default(now())
     accounts      Account[]
     sessions      Session[]

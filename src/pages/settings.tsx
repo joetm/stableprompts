@@ -18,6 +18,7 @@ import HeadMeta from '../components/HeadMeta'
 import Menu from '../components/Menu'
 import CustomModal from '../components/CustomModal'
 import PageFooter from "../components/PageFooter"
+import AccessDeniedPage from '../pages/403'
 
 
 const Settings: NextPage = () => {
@@ -25,34 +26,42 @@ const Settings: NextPage = () => {
   const [ showConfirmDel, setShowConfirmDel ] = useState(false)
   const flashText = useRef()
 
-  const apiKey = '234897osdfkjhkj2379t6yjkshdjbf'
 
-  const { data: sessionData } = useSession()
-
+  const { data: sessionData, status } = useSession()
   // TODO: check login status and disallow rendering when not logged in
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+  if (status === "unauthenticated") {
+     return <AccessDeniedPage />
+  }
 
 
+  const apiKey = sessionData.user.api_token
 
   const modalClose = () => setShowConfirm(false)
   const modalShow  = () => setShowConfirm(true)
   const modalCloseDel = () => setShowConfirmDel(false)
   const modalShowDel  = () => setShowConfirmDel(true)
 
-  const handleDeletion = () => {
+  const handleAccountDeletion = () => {
     // TODO: delete account
 
 
-
+    // close the dialog
     setShowConfirmDel(false)
+    // sign out
     signOut()
+    // redirect to homepage
     router.push('/')
   }
+
   const handleKeyRegen = () => {
     // TODO: regenerate api key
     alert('TODO')
 
 
-
+    // close the dialog
     setShowConfirm(false)
   }
 
@@ -77,19 +86,19 @@ const Settings: NextPage = () => {
         <h2>Settings</h2>
 
         <Alert className="mt-3 mb-3" variant="success">
-          <Alert.Heading>Hey, nice to see you</Alert.Heading>
+          <Alert.Heading>Have you configured the browser extension?</Alert.Heading>
           <p>
             In order for this to work, you need to install the <Link href="#todo">StablePrompts extension</Link> in each browser that is supposed to send data.
             <br />
             Once the extension is installed, refer to <Link href="/about">this page</Link> for its configuration.
             <br />
-            You will need to copy and paste your api key from below.
+            When configuring the extension, you will need to copy and paste the below API key.
           </p>
         </Alert>
 
         <Form>
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Your API Key</Form.Label>
+            <Form.Label>Your API Key:</Form.Label>
             <InputGroup className="mb-3">
                <Form.Control type="text" disabled value={apiKey} />
               <Button ref={flashText} onClick={() => copyKey(apiKey)} title="Copy to clipboard">Copy</Button>
@@ -125,7 +134,7 @@ const Settings: NextPage = () => {
           eventName="Deletion"
           showConfirm={showConfirmDel}
           handleClose={modalCloseDel}
-          handleEvent={handleDeletion}
+          handleEvent={handleAccountDeletion}
           description='You are about to delete your StablePrompts account. All your stored prompts will be deleted!'
         />
 

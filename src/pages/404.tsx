@@ -13,7 +13,12 @@ const Page404: React.FC = () => {
       <div className={styles.container}>
         <strong className={styles.errornum}>404</strong>
         Sorry, the page you visited does not exist.
-        <Button href={sessionData ? "/dashboard" : "/" } type="primary">Back Home</Button>
+        {
+          sessionData ?
+            <Button href="/dashboard" type="primary">Dashboard</Button>
+          :
+            <Button href="/" type="primary">Home</Button>
+        }
       </div>
     </div>
   )

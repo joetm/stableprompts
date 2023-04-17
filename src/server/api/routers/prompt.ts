@@ -8,7 +8,7 @@ import {
 
 export const promptRouter = createTRPCRouter({
 
-  infinitePrompts: publicProcedure
+  infinitePrompts: protectedProcedure
           .input(z.object({
             limit: z.number().min(1).max(100).nullish(),
             cursor: z.number().nullish(), // <-- "cursor" needs to exist, but can be any type
@@ -33,7 +33,7 @@ export const promptRouter = createTRPCRouter({
             }
           }),
 
-  getAll: publicProcedure
+  getAll: protectedProcedure
           .input(z.object({ userId: z.string() }))
           .query(async ({ input, ctx }) => {
               const prompts = await ctx.prisma.prompt.findMany({
@@ -43,7 +43,7 @@ export const promptRouter = createTRPCRouter({
               return prompts
           }),
 
-  getOne: publicProcedure
+  getOne: protectedProcedure
           .input(z.object({ id: z.string() }))
           .query(async ({ input, ctx }) => {
               const prompt = await ctx.prisma.prompt.findUnique(

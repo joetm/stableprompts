@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "StablePrompts",
+  "version": "1.0",
+  "description": "This extension listens to configurable input fields and sends the information for storage to StablePrompts.com.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://stableprompts.com/*"
+  ],
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/icon-48.png"
+    },
+    "default_title": "StablePrompts",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "settings/settings.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://beta.dreamstudio.ai/*"
+      ],
+      "js": [
+        "content-script.js",
+        "inject-script.js"
+      ]
+    }
+  ]
+}
